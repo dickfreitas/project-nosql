@@ -21,9 +21,9 @@ public class UserService {
     }
 
     public User findById(String id) {
-        Optional<User> user = repository.findById(id);
-        if (user.isPresent()) {
-           return user.get();
+        User user = repository.findById(id).orElse(null);
+        if (user!=null) {
+           return user;
         }else{
             throw new ObjectNotFoundException("Objeto não encontrado");
         }
@@ -37,6 +37,17 @@ public class UserService {
     public void delete(String id){
         findById(id);
         repository.deleteById(id);
+    }
+
+    public User update(User obj){
+        User newUser = repository.findById(obj.getId()).orElse(null);
+        updateData(newUser , obj);
+        return repository.save(newUser);
+    }
+
+    private void updateData(User newUser, User obj) {
+        newUser.setEmail(obj.getEmail());
+        newUser.setName(obj.getName());
     }
 
     public User fromDto(UserDTO dto){
