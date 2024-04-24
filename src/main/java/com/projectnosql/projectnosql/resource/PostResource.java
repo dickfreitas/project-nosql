@@ -1,13 +1,15 @@
 package com.projectnosql.projectnosql.resource;
 
 import com.projectnosql.projectnosql.domain.Post;
+import com.projectnosql.projectnosql.dto.CommentDTO;
+import com.projectnosql.projectnosql.dto.PostDTO;
 import com.projectnosql.projectnosql.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/post")
@@ -20,4 +22,13 @@ public class PostResource {
 
         return ResponseEntity.ok().body(post);
     }
+
+    @PostMapping
+    public ResponseEntity<Post> createPost(@RequestBody PostDTO postDTO){
+        Post created = service.createPost(postDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(postDTO.getTitle()).toUri();
+        return ResponseEntity.created(uri).body(created);
+    }
+
+
 }

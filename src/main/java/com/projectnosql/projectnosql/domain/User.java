@@ -1,5 +1,6 @@
 package com.projectnosql.projectnosql.domain;
 
+import com.projectnosql.projectnosql.dto.AuthorDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -29,6 +30,12 @@ public class User implements Serializable {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+    public AuthorDTO toAuthorDTO() {
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setName(this.name);
+        authorDTO.setId(this.id); // Definir o ID diretamente do User
+        return authorDTO;
     }
 
     public String getId() {
