@@ -1,9 +1,12 @@
 package com.projectnosql.projectnosql.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "user")
@@ -13,6 +16,13 @@ public class User implements Serializable {
     private String name;
     private String email;
 
+    /*
+    O DBRef serve para referenciar um atributo ao outro, e o lazy = true serve
+    para que nao tenha uma carga grande de dados, ao fazer a chamada dos usuarios, trazendo
+    os posts apenas quando necessario
+     */
+    @DBRef(lazy = true)
+    List<Post> posts = new ArrayList<>();
     public User(){}
 
     public User(String id, String name, String email) {
@@ -43,6 +53,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
