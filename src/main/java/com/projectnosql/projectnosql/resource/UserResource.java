@@ -1,5 +1,6 @@
 package com.projectnosql.projectnosql.resource;
 
+import com.projectnosql.projectnosql.domain.Post;
 import com.projectnosql.projectnosql.domain.User;
 import com.projectnosql.projectnosql.dto.UserDTO;
 import com.projectnosql.projectnosql.service.UserService;
@@ -60,5 +61,12 @@ public class UserResource {
 
 
         return  ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/post")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable  String id){
+        User obj = service.findById(id);
+
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
