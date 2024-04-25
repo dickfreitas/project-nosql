@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+/*
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -23,6 +24,9 @@ public class Instantiation implements CommandLineRunner {
     private PostRepository postRepository;
     @Override
     public void run(String... args) throws Exception {
+
+    userRepository.deleteAll();
+    postRepository.deleteAll();
 
         User u1 = new User(null , "Maria Green" , "maria@gmail.com");
         User u2 = new User(null , "Pedro Brown" , "pedro@gmail.com");
@@ -57,3 +61,7 @@ public class Instantiation implements CommandLineRunner {
 
     }
 }
+
+
+
+ */
