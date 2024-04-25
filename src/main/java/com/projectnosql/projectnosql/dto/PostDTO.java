@@ -1,15 +1,14 @@
 package com.projectnosql.projectnosql.dto;
 
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 import java.util.Date;
 
-public class PostDTO {
+public class PostDTO implements Serializable {
     private String title;
     private String body;
     private Date date;
-    private String authorId; // Alteração: Usando o ID do autor
-
-    // Construtor vazio
+    private String authorId;
     public PostDTO() {
     }
 

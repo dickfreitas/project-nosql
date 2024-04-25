@@ -1,20 +1,24 @@
 package com.projectnosql.projectnosql.dto;
 
+import com.projectnosql.projectnosql.domain.Post;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class CommentDTO implements Serializable {
     private String text;
     private Date date;
-    private AuthorDTO author;
+    private String authorId;
+    private String postId;
 
     public CommentDTO() {
     }
 
-    public CommentDTO(String text, Date date, AuthorDTO author) {
+    public CommentDTO(String text, Date date, String author, String post) {
         this.text = text;
         this.date = date;
-        this.author = author;
+        this.authorId = author;
+        this.postId = post;
     }
 
     public String getText() {
@@ -33,11 +37,19 @@ public class CommentDTO implements Serializable {
         this.date = date;
     }
 
-    public AuthorDTO getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(AuthorDTO author) {
-        this.author = author;
+    public void setAuthorId(String author) {
+        this.authorId = author;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String post) {
+        this.postId = post;
     }
 }
